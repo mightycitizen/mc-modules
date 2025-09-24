@@ -1,8 +1,0 @@
-uuid: 406baa93-abfa-4fed-bae5-ac5bdc2b3ffd
-langcode: en
-status: true
-dependencies: {  }
-id: main-utility
-label: 'Main menu - Utility'
-description: 'Secondary navigation that is less prominent than main – recommended 5 top-level links max.'
-locked: false

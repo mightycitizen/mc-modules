@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-name: 'Event Topic'
-vid: event_topic
-description: null
-weight: 0
-new_revision: false

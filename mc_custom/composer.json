@@ -1,7 +1,0 @@
-{
-  "name": "mightycitizen/mc-custom",
-  "type": "drupal-module",
-  "require": {
-    "drupal/core": "^11"
-  }
-}

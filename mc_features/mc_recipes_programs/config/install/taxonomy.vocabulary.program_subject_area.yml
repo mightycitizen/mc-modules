@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-name: 'Program Subject Area'
-vid: program_subject_area
-description: null
-weight: 0
-new_revision: false

@@ -1,6 +1,0 @@
-show_on_admin: false
-alert_styles: "primary|Notice\r\nemergency|Emergency\r\nweather|Weather"
-display_order: ascending
-automatic_refresh: false
-refresh_interval: 15
-cache_max_age: 15

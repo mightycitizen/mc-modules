@@ -1,8 +1,0 @@
-uuid: 3980f96a-9396-41ba-af7d-2b0a68fc3f07
-langcode: en
-status: true
-dependencies: {  }
-id: footer-utility
-label: 'Footer - Utility menu'
-description: 'Secondary footer links – recommended 7 links max, top-level links only.'
-locked: false

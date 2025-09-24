@@ -1,10 +1,7 @@
 {
   "name": "mightycitizen/mc-modules",
-  "type": "metapackage",
+  "type": "drupal-module",
   "require": {
-    "mightycitizen/mc-alerts": "*",
-    "mightycitizen/mc-custom": "*",
-    "mightycitizen/mc-directory": "*",
-    "mightycitizen/mc-icons": "*"
+    "drupal/core": "^11"
   }
 }

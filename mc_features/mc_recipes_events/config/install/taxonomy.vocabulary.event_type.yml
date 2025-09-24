@@ -1,8 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-name: 'Event Type'
-vid: event_type
-description: null
-weight: 0
-new_revision: false
