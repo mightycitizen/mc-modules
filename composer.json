@@ -1,6 +1,12 @@
 {
   "name": "mightycitizen/mc-modules",
   "type": "metapackage",
+  "repositories": [
+      {
+          "type": "path",
+          "url": "./web/modules/custom/*"
+      }
+  ],
   "require": {
     "mightycitizen/mc-alerts": "^1.0 || dev-main",
     "mightycitizen/mc-custom": "^1.0 || dev-main",
