@@ -1,0 +1,5 @@
+services:
+  mc_alerts.route_subscriber:
+    class: Drupal\mc_alerts\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }

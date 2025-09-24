@@ -1,0 +1,67 @@
+<?php
+
+use Drupal\graphql\GraphQL\Execution\FieldContext;
+use Drupal\graphql_compose\Plugin\GraphQLCompose\GraphQLComposeFieldTypeInterface;
+use Drupal\graphql_compose\Plugin\GraphQLComposeSchemaTypeManager;
+use GraphQL\Type\Definition\Type;
+use GraphQL\Type\Definition\ObjectType;
+
+/**
+ * Add custom types to the schema.
+ *
+ * @param Drupal\graphql_compose\Plugin\GraphQLComposeSchemaTypeManager $manager
+ *   The GraphQL Compose Schema Type Manager.
+ */
+function mc_icons_graphql_compose_print_types(GraphQLComposeSchemaTypeManager $manager): void {
+  $icon_type = new ObjectType([
+    'name' => 'Icon',
+    'fields' => [
+      'id' => Type::string(),
+    ],
+  ]);
+  $manager->add($icon_type);
+}
+
+/**
+ * Add extensions to the schema.
+ *
+ * @param Drupal\graphql_compose\Plugin\GraphQLComposeSchemaTypeManager $manager
+ *   The GraphQL Compose Schema Type Manager.
+ */
+function mc_icons_graphql_compose_print_extensions(GraphQLComposeSchemaTypeManager $manager): void {
+  $link_extension = new ObjectType([
+    'name' => 'Link',
+    'fields' => fn() => [
+      'icon' => [
+        'type' => $manager->get('Icon'),
+        'description' => (string) t('Icon'),
+      ],
+    ],
+  ]);
+  $manager->extend($link_extension);
+}
+
+/**
+ * Implements hook_graphql_compose_field_results_alter().
+ *
+ * This hook alters the results for link fields. 
+ * If a link has an icon associated with it in its display options, add that to the schema.
+ */
+function mc_icons_graphql_compose_field_results_alter(array &$results, $entity, GraphQLComposeFieldTypeInterface $plugin, FieldContext $context): void {
+  $field_definition = $plugin->getFieldDefinition();
+
+  if ($field_definition->getType() === 'link') {
+    $field_name = $field_definition->getName();
+
+    foreach ($results as $key => &$link_data) {
+      $item = $entity->$field_name[$key]->getValue();
+      if (isset($item['options']['icon'])){
+        $icon_id = $item['options']['icon']['target_id'];
+        $link_data['icon'] = [
+          '__typename' => 'Icon',
+          'id' => $icon_id ?? NULL,
+        ];
+      }
+    }
+  }
+}

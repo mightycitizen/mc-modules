@@ -1,0 +1,5 @@
+services:
+  mc_custom.twig.extension:
+    class: Drupal\mc_custom\Template\TwigExtension
+    tags:
+      - { name: twig.extension }

@@ -1,0 +1,113 @@
+<?php
+
+use Drupal\config_pages\Entity\ConfigPages;
+use Drupal\Core\Url;
+
+/**
+ * @file
+ * Contains mc_alerts.module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function mc_alerts_theme() {
+  return [
+    'sitewide_alerts' => [
+      'variables' => [
+        'config_pages' => [],
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function mc_alerts_menu_local_tasks_alter(&$data, $route_name) {
+  if (($route_name === 'entity.sitewide_alert.canonical') || ($route_name === 'entity.sitewide_alert.edit_form')) {
+    if (isset($data['tabs'][0]['entity.sitewide_alert.canonical'])) {
+      // Override the text of the "Edit" tab.
+      $data['tabs'][0]['entity.sitewide_alert.canonical']['#link']['title'] = 'View';
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_block().
+ */
+function mc_alerts_preprocess_block__hero_block(&$variables) {
+  // Alert Detail pages.
+  if ($alert = \Drupal::routeMatch()->getParameter('sitewide_alert')) {
+    $alert_type = $alert->get('style')->value;
+    $variables['alert'] = [
+      'id' => $alert->id(),
+      'type' => _get_alert_styles($alert->get('style')->value),
+      'heading' => $alert->get('name')->value,
+      'status' => $alert->get('status')->value,
+      'updated' => $alert->get('changed')->value,
+      'message' => $alert->get('message')->view(),
+    ];
+  }
+
+  // Alerts Listing page.
+  elseif (\Drupal::routeMatch()->getRouteName() == 'mc_alerts.alerts_listing') {
+    $config = ConfigPages::config('alerts');
+    if ($config) {
+      $variables['summary'] = $config->get('field_body')->view(['label'=>'hidden']);
+      $variables['hero_button'] = $config->get('field_cta_primary')->first() ? [
+        'url' => $config->get('field_cta_primary')->first()->getUrl()->toString(),
+        'text' => $config->get('field_cta_primary')->title,
+      ] : NULL ;
+      $variables['readmore_link'] = $config->get('field_cta_secondary')->first() ? [
+        'url' => $config->get('field_cta_secondary')->first()->getUrl()->toString(),
+        'text' => $config->get('field_cta_secondary')->title,
+      ] : NULL;
+      $links_bar = $config->get('field_links_5');
+      foreach ($links_bar as $link) {
+        $variables['links_bar_menu'][] = [
+          'url' => $link->getUrl()->toString(),
+          'text' => $link->title,
+          'icon' => $link->options['icon'] ? ['name'=>str_replace('phosphor:', 'bg-transparent ph ph-', $link->options['icon']['target_id'])] : NULL,
+        ];
+      }
+    }
+  }
+}
+
+function mc_alerts_preprocess_sitewide_alert(&$variables) {
+  $alert = $variables['sitewide_alert'];
+  $style = $alert->get('style')->value;
+  $variables['alert_type'] = _get_alert_styles($style);
+}
+
+function _get_alert_styles($style) {
+  // currently only primary, emergency, and weather (may change per project)
+  $variables = [
+    'type' => $style,
+    'icon_colors' => 'bg-primary-100 text-primary-500',
+  ];
+  switch ($style) {
+    case 'emergency':
+      $variables['label'] = 'Emergency Alert';
+      $variables['icon'] = [
+        'name' => 'bg-transparent ph ph-warning',
+      ];
+      $variables['icon_colors'] = 'bg-tertiary-100 text-tertiary-700';
+      break;
+
+    case 'weather':
+      $variables['label'] = 'Weather Alert';
+      $variables['icon'] = [
+        'name' => 'bg-transparent ph ph-cloud-lightning',
+      ];
+      break;
+
+    default:
+      $variables['label'] = 'Notice';
+      $variables['icon'] = [
+        'name' => 'bg-transparent ph ph-warning-circle',
+      ];
+  }
+  return $variables;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "mightycitizen/mc-icons",
+  "type": "drupal-module",
+  "require": {
+    "drupal/core": "^11"
+  }
+}

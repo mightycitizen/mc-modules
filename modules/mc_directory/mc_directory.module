@@ -1,0 +1,23 @@
+<?php
+/**
+ * @file
+ * MC Directory custom module.
+ */
+
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_node_presave().
+ */
+function mc_directory_node_presave(\Drupal\node\NodeInterface $node) {
+  // Title fields are hidden on the person node edit form.
+  // On save, set the title to the first (or preferred) name and last name.
+  if ($node->bundle() === 'person') {
+    $first_name = $node->get('field_first_name')->value;
+    $last_name = $node->get('field_last_name')->value;
+    $preferred_name = $node->get('field_preferred_name')->value;
+
+    $title = ($preferred_name ?: $first_name) . ' ' . $last_name;
+    $node->setTitle($title);
+  }
+}

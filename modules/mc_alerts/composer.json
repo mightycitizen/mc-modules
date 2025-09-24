@@ -1,0 +1,7 @@
+{
+  "name": "mightycitizen/mc-alerts",
+  "type": "drupal-module",
+  "require": {
+    "drupal/core": "^11"
+  }
+}

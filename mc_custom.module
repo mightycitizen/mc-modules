@@ -1,0 +1,494 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for mc_custom module.
+ */
+
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\views\Views;
+use Drupal\Core\Url;
+use Drupal\Component\Render\FormattableMarkup;
+use Drupal\media\Entity\Media;
+use Drupal\Core\Cache\Cache;
+use Drupal\node\NodeInterface;
+
+
+/**
+ * Implements hook_theme().
+ */
+function mc_custom_theme() {
+  return [
+    'footer_block' => [
+      'variables' => [
+        'social' => [],
+        'ctas' => [],
+        'contact' => [],
+    ],
+    ],
+    'header_block' => [
+      'variables' => [],
+    ],
+    'hero_block' => [
+      'variables' => [],
+    ],
+    'sidebar_block' => [
+      'variables' => [],
+    ],
+  ];
+}
+
+
+/**
+ * Implements hook_views_data_alter().
+ * 
+ * Alters specific entity reference filters to use a select dropdown instead of autocomplete.
+ * 
+ * @see https://www.drupal.org/node/3403710
+ */
+function mc_custom_views_data_alter(&$data) {
+  // @REVIEW: Certain projects may have a large amount of organizations (100+) and may want to disable this.
+  $data['node__field_college_school']['field_college_school_target_id']['filter']['id'] = 'entity_reference';
+  $data['node__field_organizations']['field_organizations_target_id']['filter']['id'] = 'entity_reference';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for Views exposed forms.
+ *
+ * Add a select to the style_guide view so the preview can switch view modes.
+ */
+function mc_custom_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Ensure this is a views exposed form and has the view in state.
+  $view = $form_state->get('view');
+  if ($view->id() == 'style_guide') {
+    $options = [
+      '' => t('- Select view mode -'),
+      'card' => 'card',
+      'card_featured' => 'card_featured',
+      'card_stacked' => 'card_stacked',
+      'teaser' => 'teaser',
+      'teaser_short' => 'teaser_short',
+    ];
+
+    $element = [
+      '#type' => 'select',
+      '#title' => t('Display view mode'),
+      '#options' => $options,
+      '#default_value' => $view->getDisplay()->getOption('row') && isset($view->exposed_input['style_guide_view_mode']) ? $view->exposed_input['style_guide_view_mode'] : 'teaser',
+      '#weight' => -1,
+    ];
+
+    $form['filter_view_mode'] = $element;
+  }
+}
+
+
+/**
+ * Implements hook_views_pre_build().
+ *
+ * Allow the style_guide view to override the row plugin's view_mode option
+ * based on an exposed filter value so the preview can render different view modes.
+ */
+function mc_custom_views_pre_build(\Drupal\views\ViewExecutable $view) {
+  if ($view->id() == 'style_guide') {
+
+    // Use the public getter for exposed input.
+    $input = $view->getExposedInput();
+    if (!empty($input['filter_view_mode'])) {
+      $selected_mode = $input['filter_view_mode'];
+      // Update the row plugin options so the rendered entity view mode is changed.
+      if ($row_plugin = $view->display_handler->getPlugin('row')) {
+        if (is_array($row_plugin->options) && array_key_exists('view_mode', $row_plugin->options)) {
+          $row_plugin->options['view_mode'] = $selected_mode;
+        }
+      }
+    }
+  }
+}
+
+
+// function mc_custom_preprocess_node(&$variables)  {
+//   $node = $variables['node'];
+//   $view_mode = $variables['view_mode'];
+//   $type = $node->getType();
+
+// }
+
+// /**
+//  * Implements hook_preprocess_paragraph__accordion_cards().
+//  * Retrieves third-level nested accordion data.
+//  * @param $variables
+//  *
+//  * @return void
+//  */
+// function mc_custom_preprocess_paragraph__accordion_cards(&$variables) {
+//   $paragraph = $variables['elements']['#paragraph'];
+//   $card_parent = $variables['paragraph']->getParentEntity();
+//   $cards = [];
+//   foreach ($paragraph->get('field_paragraphs') as $cards_pp) {
+//     if ($cards_pp->entity->getType() == 'accordion_cards_item') {   // e.g., "main_content" or "social_media"
+//       $card_items = $cards_pp->entity;
+//       foreach ($card_items->get('field_paragraphs')  as $card_item) {
+//         $card = $card_item->entity;
+//         $title = $card->get('field_heading_link')->title;
+//         $url = Url::fromUri($card->get('field_heading_link')->uri);
+//         $description = $card->get('field_text_long_formatted')->value;
+//         $media_id = $card->get('field_image')->target_id;
+//         $image_info = getImageInfoFromMedia($media_id, 'vertical_card');
+//         $cards[] = [
+//           'image' => [
+//             'src' => $image_info['src'],
+//             'alt' => $image_info['alt'],
+//           ],
+//           'summary' => $description,
+//           'heading' => [
+//             'level' => '3',
+//             'modifier' => 'h3',
+//             'text' => $title,
+//             'url' => $url,
+//           ],
+//         ];
+
+//       }
+//     }
+//   }
+//   $variables['accordion_cards'] = $cards;
+// }
+
+// /**
+//  * Returns information on an image file after receiving media id.
+//  *
+//  * @param $media_id
+//  *  The file id of the image.
+//  * @param $style
+//  *  The image style to use for the return url.
+//  *
+//  * @return array
+//  */
+// function getImageInfoFromMedia($media_id = 0, $style = '') {
+//   $image_url = '';
+//   $image_alt = '';
+//   if ($media_id) {
+//     $media = Media::load($media_id);
+//     $fid = $media->field_media_image->target_id;
+//     $file = File::load($fid);
+//     if ($file) {
+//       $file_uri = $file->getFileUri();
+//       if (!empty($style)) {
+//         $style = ImageStyle::load($style);
+//         $image_url = $style->buildUrl($file_uri);
+//       }
+//       else {
+//         $image_url = \Drupal::service('file_url_generator')->generateAbsoluteString($file_uri);
+//       }
+//       $image_alt = $file->image_alt;
+//     }
+//   }
+//   $image_info = [
+//     'src' => $image_url,
+//     'alt' => $image_alt,
+//   ];
+//   return $image_info;
+// }
+
+// /**
+//  * Implements hook_preprocess_page().
+//  * @param $variables
+//  *
+//  * @return void
+//  * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+//  * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+//  */
+// function mc_custom_preprocess_page(&$variables) {
+//   $route_match = \Drupal::routeMatch();
+//   $node = FALSE;
+
+//   if ($route_match->getRouteName() == 'entity.node.canonical') {
+//     $node = $route_match->getParameter('node');
+//   }
+//   elseif ($route_match->getRouteName() == 'entity.node.revision') {
+//     $node = $route_match->getParameter('node_revision');
+//   }
+//   elseif ($route_match->getRouteName() == 'entity.node.preview') {
+//     $node = $route_match->getParameter('node_preview');
+//   }
+//   if ($node instanceof \Drupal\node\NodeInterface) {
+//     $type = $node->getType();
+
+//     // Exposed selected event variables to page template.
+
+//     if ($type == 'event') {
+//       thc_custom_get_event_taxonomy_links($variables, $node);
+//     }
+
+//     if ($type == 'blog') {
+//       $audiences = getNodeReferenceValues($node->field_audience);
+//       $historic_sites = getNodeReferenceValues($node->field_historic_site);
+//       $other_categories = getTaxononomyValues($node->field_categories, '');
+
+//       $categories = array_merge($audiences, $historic_sites, $other_categories);
+//       $variables['categories'] = $categories;
+
+//       $media_id = isset($node->field_image->entity) ? $node->field_image->target_id : 0;
+//       $image_info = getImageInfoFromMedia($media_id, 'detail_featured_image');
+//       $variables['image_info'] = $image_info;
+
+//       $created_time = $node->getCreatedTime();
+//       $date = [
+//         'unformatted' => date('Y-m-d', $created_time),
+//         'full' => date('M j, Y', $created_time),
+//       ];
+//       $variables['date'] = $date;
+
+//     }// Exposed selected blog variables to page template.
+//     if ($type == 'press_release') {
+//       $audiences = getNodeReferenceValues($node->field_audience);
+//       $historic_sites = getNodeReferenceValues($node->field_historic_site);
+//       $other_categories = getTaxononomyValues($node->field_categories, '');
+
+//       $categories = array_merge($audiences, $historic_sites, $other_categories);
+//       $variables['categories'] = $categories;
+
+//       $media_id = isset($node->field_image->entity) ? $node->field_image->target_id : 0;
+//       $image_info = getImageInfoFromMedia($media_id, 'detail_featured_image');
+//       $variables['image_info'] = $image_info;
+
+//       $created_time = $node->getCreatedTime();
+//       $date = [
+//         'unformatted' => date('Y-m-d', $created_time),
+//         'full' => date('M j, Y', $created_time),
+//       ];
+//       $variables['date'] = $date;
+
+//     }
+//   }
+//   $main_nav = getMenuNav('main');
+//   $variables['menu'] = $main_nav;
+
+// }
+// /**
+//  * Retrieves taxonomy values in storybook format.
+//  *
+//  * @param $field
+//  * The field entity.
+//  * @param $listing_type
+//  * The listing type, e.g. events, blog. Used to set the url for the item.
+//  *
+//  * @return array
+//  */
+// function getTaxononomyValues($field, $listing_type = '') {
+//   if (!isset($field)) {
+//     return [];
+//   }
+//   $values = [];
+//   foreach ($field as $item) {
+//     $id = $item->entity->id();
+//     switch ($listing_type) {
+//       case 'event':
+//         $url = '/events?type=' . $id;
+//         break;
+//       default:
+//         $url = '';
+//         break;
+//     }
+//     $values[] = [
+//       'title' => $item->entity->name->value,
+//       'id' => $id,
+//       'url' => $url,
+//     ];
+//   }
+//   return $values;
+// }
+
+// /**
+//  * Retrieves node reference values in storybook suitable array.
+//  * @param $field
+//  * The field entity storing the info.
+//  * @return array
+//  */
+// function getNodeReferenceValues($field) {
+//   if (!isset($field)) {
+//     return [];
+//   }
+//   $values = [];
+//   foreach ($field as $item) {
+//     $url = $item->entity->toUrl()->toString();
+//     if ($item->entity->field_external_link) {
+//       $url = $item->entity->field_external_link->uri ? $item->entity->field_external_link->uri : $item->entity->toUrl()->toString();
+//     }
+//     $values[] = [
+//       'title' => $item->entity->title->value,
+//       'url' => $url,
+//     ];
+//   }
+//   return $values;
+// }
+// /**
+//  * Retrieves menu items in a storybook suitable array.
+//  * @param string $menu_name
+//  * The name of the menu to retrieve.
+//  * @return array
+//  */
+// function getMenuNav($menu_name) {
+//   $menu_tree = \Drupal::menuTree();
+//   $parameters = new \Drupal\Core\Menu\MenuTreeParameters();
+//   $parameters->onlyEnabledLinks();
+//   $tree = $menu_tree->load($menu_name, $parameters);
+
+//   return transformMenuTree($tree);
+// }
+
+// /**
+//  * Transforms a Drupal menu tree to a suitable array format.
+//  * @param array $tree
+//  * The menu tree.
+//  * @return array
+//  */
+// function transformMenuTree(array $tree) {
+//   $menu_array = [];
+//   foreach ($tree as $element) {
+//     $link = $element->link;
+//     $submenu = $element->subtree ? transformMenuTree($element->subtree) : [];
+
+//     $menu_array[] = [
+//       'text' => $link->getTitle(),
+//       'url' => $link->getUrlObject()->toString(),
+//       'new_window' => FALSE,
+//       'weight' => $link->getWeight(),
+//       'children' => $submenu,
+//     ];
+//   }
+//   if ($menu_array) {
+//     $title_order  = array_column($menu_array, 'text');
+//     $weight_order = array_column($menu_array, 'weight');
+//     array_multisort($weight_order, SORT_ASC, $title_order, SORT_ASC, $menu_array);
+//   }
+
+//   return $menu_array;
+// }
+
+
+
+
+// /**
+//  * Retrieves all blog posts as an array.
+//  *
+//  * @return array
+//  */
+// function getBlogPosts() {
+//   $storage = \Drupal::entityTypeManager()->getStorage('node');
+//   $query = \Drupal::entityQuery('node')
+//     ->condition('type', 'blog')
+//     ->condition('status', 1)
+//     ->accessCheck(FALSE)
+//     ->sort('created', 'DESC')
+//     ->sort('title', 'ASC');
+
+//   $nids = $query->execute();
+//   $nodes = $storage->loadMultiple($nids);
+//   $results = [];
+//   foreach ($nodes as $node) {
+//     $results[] =
+//       [
+//         'title' => $node->getTitle(),
+//         'url' => $node->toUrl()->toString(),
+//         'date' => date('M j, Y', $node->getCreatedTime()),
+//       ];
+//   }
+//   return $results;
+// }
+
+// function getPressReleases() {
+//   $storage = \Drupal::entityTypeManager()->getStorage('node');
+//   $query = \Drupal::entityQuery('node')
+//     ->condition('type', 'press_release')
+//     ->condition('status', 1)
+//     ->accessCheck(FALSE)
+//     ->sort('created', 'DESC')
+//     ->sort('title', 'ASC');
+
+//   $nids = $query->execute();
+//   $nodes = $storage->loadMultiple($nids);
+//   $results = [];
+//   foreach ($nodes as $node) {
+//     $results[] =
+//       [
+//         'title' => $node->getTitle(),
+//         'url' => $node->toUrl()->toString(),
+//         'date' => date('M j, Y', $node->getCreatedTime()),
+//       ];
+//   }
+//   return $results;
+// }
+
+// /**
+//  * Implement hook_entity_presave()
+//  * @param \Drupal\node\NodeInterface $node
+//  */
+// function thc_custom_node_presave(NodeInterface $node) {
+//   $tags = [];
+//   $nid = $node->id();
+//   $node_type = $node->getType();
+//   //INVALIDATE ALL CACHETAGS FOR TEAM MEMBERS
+//   if ($node_type == 'historic_sites_detail') {
+//     // Set Historic Sites home node for cache clearing.
+//     $tags[] = 'thc:historic_site_home';
+//   }
+//   if ($node_type == 'historic_site') {
+//     $tags[] = 'thc:historic_site_home';
+//   }
+//   Cache::invalidateTags($tags);
+// }
+
+// /**
+//  * Implements hook_preprocess_HOOK().
+//  * Paragraph library items are only storing the revision at the time of placement
+//  * in a node, and not updating the node  revision id when the library item is updated.
+//  * This updates the node field revision id to match the latest in the paragraph item.
+//  *
+//  */
+// function mc_custom_paragraph_presave(\Drupal\paragraphs\ParagraphInterface
+// $paragraph) {
+//   $tags = [];
+//   //INVALIDATE ALL CACHETAGS FOR Nodes referencing library item.
+//   $parent = $paragraph->getParentEntity();
+//   if ($parent) {
+//     $parent_type = $parent->bundle();
+//     if ($parent_type == 'paragraphs_library_item') {
+//       $parent_id = $parent->id();
+//       $revision_id = $parent->getLoadedRevisionId();
+//       $tags[] = 'paragraph:' . $paragraph->id();
+//       // Retrieve all nodes where field_reusable_content target_id = parent_id.
+//       $storage = \Drupal::entityTypeManager()->getStorage('node');
+//       $query = \Drupal::entityQuery('node')
+//         ->condition('field_reusable_content', [$parent_id], 'IN')
+//         ->accessCheck(FALSE);
+//       $nids = $query->execute();
+//       $nodes = $storage->loadMultiple($nids);
+//       foreach ($nodes as $node) {
+//         $node->field_reusable_content->target_revision_id = $revision_id;
+//         $node->save();
+//         $tags[] = 'node:' . $node->id();
+//       }
+//     }
+//   }
+//   Cache::invalidateTags($tags);
+// }
+
+// function mc_custom_get_event_taxonomy_links(&$variables, $node) {
+//   $audiences = getNodeReferenceValues($node->field_audience);
+//   $event_types = getTaxononomyValues($node->field_categories, 'event');
+//   $historic_sites = getNodeReferenceValues($node->field_historic_site);
+//   $button_title = $node->field_button->title ?? '';
+//   $button_link = $node->field_button->uri ?? '';
+//   $categories = array_merge($audiences, $historic_sites, $event_types);
+//   $variables['categories'] = $categories;
+//   $media_id = isset($node->field_image->entity) ? $node->field_image->target_id : 0;
+//   $image_info = getImageInfoFromMedia($media_id, 'detail_featured_image');
+//   $variables['image_info'] = $image_info;
+//   $variables['button'] = [
+//     'title' => $button_title,
+//     'url' => $button_link,
+//   ];
+// }
