@@ -1,0 +1,28 @@
+uuid: c864e68c-6832-47f0-9538-402f4437e31d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.menu_link_content.main-utility.field_icon
+    - system.menu.main-utility
+  module:
+    - ui_icons_field
+id: menu_link_content.main-utility.default
+targetEntityType: menu_link_content
+bundle: main-utility
+mode: default
+content:
+  children:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_icon:
+    type: icon_formatter
+    label: above
+    settings:
+      icon_settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden: {  }

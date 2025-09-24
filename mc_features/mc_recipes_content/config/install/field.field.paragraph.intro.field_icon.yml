@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_icon
+    - paragraphs.paragraphs_type.intro
+  module:
+    - ui_icons_field
+id: paragraph.intro.field_icon
+field_name: field_icon
+entity_type: paragraph
+bundle: intro
+label: 'Label Icon'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_icon_pack:
+    phosphor: phosphor
+field_type: ui_icon

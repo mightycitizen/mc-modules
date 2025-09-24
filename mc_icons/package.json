@@ -1,0 +1,8 @@
+{
+  "name": "ui_icons_phosphor",
+  "private": true,
+  "license": "ISC",
+  "dependencies": {
+    "@phosphor-icons/core": "^2.1.1"
+  }
+}

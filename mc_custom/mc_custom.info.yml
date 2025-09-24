@@ -1,0 +1,8 @@
+name: 'MC Custom'
+type: module
+description: 'Custom blocks and functionality for the Foundational Build.'
+package: MC
+core_version_requirement: ^11
+
+dependencies:
+  - config_pages:config_pages

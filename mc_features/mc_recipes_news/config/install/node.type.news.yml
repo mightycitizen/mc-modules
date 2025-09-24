@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - type_tray
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  type_tray:
+    type_category: general
+    type_thumbnail: ''
+    type_icon: /modules/custom/mc_icons/icons/phosphor/regular/article.svg
+    type_description: ''
+    existing_nodes_link_text: 'View existing <em class="placeholder">News</em> content'
+    type_weight: 0
+name: News
+type: news
+description: 'An article or announcement about recent occurrences.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

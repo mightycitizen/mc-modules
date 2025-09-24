@@ -1,0 +1,7 @@
+mc_alerts.alerts_listing:
+  path: '/alerts'
+  defaults:
+    _title_callback: '\Drupal\mc_alerts\Controller\AlertsListingController::getAlertsListingTitle'
+    _controller: '\Drupal\mc_alerts\Controller\AlertsListingController::getAlertsListingPage'
+  requirements:
+    _permission: 'access content'

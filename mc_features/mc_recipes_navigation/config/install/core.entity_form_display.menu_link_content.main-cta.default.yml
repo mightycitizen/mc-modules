@@ -1,0 +1,38 @@
+uuid: 030b5fff-a8f7-4115-9c30-d55e889b0844
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.menu_link_content.main-cta.field_icon
+    - system.menu.main-cta
+  module:
+    - link
+    - menu_item_extras
+    - ui_icons_field
+id: menu_link_content.main-cta.default
+targetEntityType: menu_link_content
+bundle: main-cta
+mode: default
+content:
+  field_icon:
+    type: icon_widget
+    weight: 21
+    region: content
+    settings:
+      icon_selector: icon_picker
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  view_mode:
+    type: menu_item_extras_view_mode_selector_select
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden: {  }

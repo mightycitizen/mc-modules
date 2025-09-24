@@ -1,0 +1,12 @@
+bundle: mc_recipes
+excluded:
+  - block.block.mc_theme_footerblock
+  - block.block.mc_theme_headerblock
+  - block.block.olivero_main_menu
+  - core.entity_form_display.config_pages.alerts.default
+  - core.entity_view_display.config_pages.alerts.default
+  - field.field.config_pages.alerts.field_cta_primary
+  - field.field.config_pages.alerts.field_cta_secondary
+  - field.storage.config_pages.field_cta_primary
+  - field.storage.config_pages.field_cta_secondary
+required: true

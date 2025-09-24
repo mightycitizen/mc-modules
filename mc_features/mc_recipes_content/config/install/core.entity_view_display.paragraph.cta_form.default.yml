@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.cta_form.field_form
+    - field.field.paragraph.cta_form.field_intro
+    - field.field.paragraph.cta_form.field_media
+    - paragraphs.paragraphs_type.cta_form
+  module:
+    - entity_reference_revisions
+    - webform
+id: paragraph.cta_form.default
+targetEntityType: paragraph
+bundle: cta_form
+mode: default
+content:
+  field_form:
+    type: webform_entity_reference_entity_view
+    label: above
+    settings:
+      source_entity: true
+      lazy: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_intro:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_media:
+    type: entity_reference_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden: {  }

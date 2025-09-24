@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.statistic_item.field_description
+    - field.field.paragraph.statistic_item.field_icon
+    - field.field.paragraph.statistic_item.field_stat_primary
+    - field.field.paragraph.statistic_item.field_stat_secondary
+    - paragraphs.paragraphs_type.statistic_item
+  module:
+    - text
+    - ui_icons_field
+id: paragraph.statistic_item.default
+targetEntityType: paragraph
+bundle: statistic_item
+mode: default
+content:
+  field_description:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_icon:
+    type: icon_formatter
+    label: above
+    settings:
+      icon_settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  field_stat_primary:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_stat_secondary:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden: {  }

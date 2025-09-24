@@ -1,0 +1,24 @@
+uuid: b4c18586-5ed1-4965-b776-3c43b6ff623e
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.global_settings
+    - field.storage.config_pages.field_contact_phone
+    - filter.format.plain_text
+  module:
+    - text
+id: config_pages.global_settings.field_contact_phone
+field_name: field_contact_phone
+entity_type: config_pages
+bundle: global_settings
+label: 'Contact - Phone'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - plain_text
+field_type: text

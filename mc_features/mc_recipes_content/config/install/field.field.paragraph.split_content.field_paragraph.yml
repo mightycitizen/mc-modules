@@ -1,0 +1,89 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_paragraph
+    - paragraphs.paragraphs_type.card
+    - paragraphs.paragraphs_type.form
+    - paragraphs.paragraphs_type.links_list
+    - paragraphs.paragraphs_type.media
+    - paragraphs.paragraphs_type.split_content
+    - paragraphs.paragraphs_type.statistics
+  module:
+    - entity_reference_revisions
+id: paragraph.split_content.field_paragraph
+field_name: field_paragraph
+entity_type: paragraph
+bundle: split_content
+label: Paragraph
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      card: card
+      form: form
+      links_list: links_list
+      media: media
+      statistics: statistics
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: 18
+        enabled: false
+      accordion_item:
+        weight: 19
+        enabled: false
+      card:
+        weight: 20
+        enabled: true
+      contact:
+        weight: 21
+        enabled: false
+      contact_item:
+        weight: 22
+        enabled: false
+      content_grid:
+        weight: 23
+        enabled: false
+      cta_basic:
+        weight: 24
+        enabled: false
+      cta_form:
+        weight: 25
+        enabled: false
+      cta_links:
+        weight: 26
+        enabled: false
+      form:
+        weight: 27
+        enabled: true
+      from_library:
+        weight: 28
+        enabled: false
+      intro:
+        weight: 29
+        enabled: false
+      links_list:
+        weight: 30
+        enabled: true
+      media:
+        weight: 32
+        enabled: true
+      split_content:
+        weight: 31
+        enabled: false
+      statistic_item:
+        weight: 33
+        enabled: false
+      statistics:
+        weight: 32
+        enabled: true
+      wysiwyg:
+        weight: 34
+        enabled: false
+field_type: entity_reference_revisions

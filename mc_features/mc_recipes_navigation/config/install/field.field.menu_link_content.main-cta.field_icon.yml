@@ -1,0 +1,23 @@
+uuid: 8d9a270a-c0eb-4801-926a-908062b5133f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.menu_link_content.field_icon
+    - system.menu.main-cta
+  module:
+    - ui_icons_field
+id: menu_link_content.main-cta.field_icon
+field_name: field_icon
+entity_type: menu_link_content
+bundle: main-cta
+label: Icon
+description: 'Applied to top-level links only.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_icon_pack:
+    phosphor: phosphor
+field_type: ui_icon

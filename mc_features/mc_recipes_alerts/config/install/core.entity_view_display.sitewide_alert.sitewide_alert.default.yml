@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.sitewide_alert.sitewide_alert.field_body
+  module:
+    - sitewide_alert
+    - text
+id: sitewide_alert.sitewide_alert.default
+targetEntityType: sitewide_alert
+bundle: sitewide_alert
+mode: default
+content:
+  field_body:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  message:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

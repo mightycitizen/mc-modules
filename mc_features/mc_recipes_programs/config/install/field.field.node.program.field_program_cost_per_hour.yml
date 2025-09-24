@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_program_cost_per_hour
+    - node.type.program
+id: node.program.field_program_cost_per_hour
+field_name: field_program_cost_per_hour
+entity_type: node
+bundle: program
+label: 'Cost per credit hour'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: $
+  suffix: ''
+field_type: integer

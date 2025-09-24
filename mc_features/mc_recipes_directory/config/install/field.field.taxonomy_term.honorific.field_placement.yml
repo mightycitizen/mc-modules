@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_placement
+    - taxonomy.vocabulary.honorific
+  module:
+    - options
+id: taxonomy_term.honorific.field_placement
+field_name: field_placement
+entity_type: taxonomy_term
+bundle: honorific
+label: Placement
+description: 'Select whether the honorific should be used as a prefix (e.g. Dr., Prof., Mr., Ms.) or a suffix (e.g. Ph.D., M.D., Esq.).'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - sitewide_alert
+id: alerts
+label: Alerts
+type: 'canonical_entities:sitewide_alert'
+pattern: 'alerts/[sitewide_alert:name]'
+selection_criteria: {  }
+selection_logic: and
+weight: 0
+relationships: {  }

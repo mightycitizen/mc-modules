@@ -1,0 +1,93 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_intro
+    - paragraphs.paragraphs_type.intro
+    - paragraphs.paragraphs_type.people_grid
+  module:
+    - entity_reference_revisions
+id: paragraph.people_grid.field_intro
+field_name: field_intro
+entity_type: paragraph
+bundle: people_grid
+label: Intro
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      intro: intro
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: 4
+        enabled: false
+      accordion_item:
+        weight: 5
+        enabled: false
+      card:
+        weight: 25
+        enabled: false
+      contact:
+        weight: 26
+        enabled: false
+      contact_item:
+        weight: 27
+        enabled: false
+      content_grid:
+        weight: 28
+        enabled: false
+      cta_basic:
+        weight: 29
+        enabled: false
+      cta_form:
+        weight: 30
+        enabled: false
+      cta_links:
+        weight: 31
+        enabled: false
+      events_grid:
+        weight: 32
+        enabled: false
+      form:
+        weight: 33
+        enabled: false
+      from_library:
+        weight: 34
+        enabled: false
+      intro:
+        weight: 6
+        enabled: true
+      links_list:
+        weight: 36
+        enabled: false
+      media:
+        weight: 37
+        enabled: false
+      news_grid:
+        weight: 38
+        enabled: false
+      people_grid:
+        weight: 39
+        enabled: false
+      programs_grid:
+        weight: 40
+        enabled: false
+      split_content:
+        weight: 41
+        enabled: false
+      statistic_item:
+        weight: 43
+        enabled: false
+      statistics:
+        weight: 42
+        enabled: false
+      wysiwyg:
+        weight: 44
+        enabled: false
+field_type: entity_reference_revisions

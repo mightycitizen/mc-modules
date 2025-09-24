@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_organizations
+    - node.type.organization
+    - paragraphs.paragraphs_type.people_grid
+id: paragraph.people_grid.field_organizations
+field_name: field_organizations
+entity_type: paragraph
+bundle: people_grid
+label: Organizations
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      organization: organization
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

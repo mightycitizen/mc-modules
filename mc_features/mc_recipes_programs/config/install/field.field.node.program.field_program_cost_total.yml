@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_program_cost_total
+    - node.type.program
+id: node.program.field_program_cost_total
+field_name: field_program_cost_total
+entity_type: node
+bundle: program
+label: 'Estimated total cost'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: $
+  suffix: ''
+field_type: integer

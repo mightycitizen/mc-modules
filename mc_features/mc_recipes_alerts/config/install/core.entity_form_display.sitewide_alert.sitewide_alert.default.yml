@@ -1,0 +1,43 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.sitewide_alert.sitewide_alert.field_body
+  module:
+    - datetime_range
+    - maxlength
+    - sitewide_alert
+    - text
+id: sitewide_alert.sitewide_alert.default
+targetEntityType: sitewide_alert
+bundle: sitewide_alert
+mode: default
+content:
+  field_body:
+    type: text_textarea
+    weight: 26
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  message:
+    type: text_textarea
+    weight: -13
+    region: content
+    settings:
+      rows: 2
+      placeholder: ''
+    third_party_settings:
+      maxlength:
+        maxlength_js: 200
+        maxlength_js_label: 'Recommended @limit characters, remaining: <strong>@remaining</strong>'
+        maxlength_js_enforce: false
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  user_id: true

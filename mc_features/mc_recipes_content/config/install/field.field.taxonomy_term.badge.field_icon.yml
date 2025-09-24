@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_icon
+    - taxonomy.vocabulary.badge
+  module:
+    - ui_icons_field
+id: taxonomy_term.badge.field_icon
+field_name: field_icon
+entity_type: taxonomy_term
+bundle: badge
+label: Icon
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_icon_pack: {  }
+field_type: ui_icon

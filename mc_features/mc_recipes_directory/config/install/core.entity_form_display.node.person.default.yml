@@ -1,0 +1,292 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.person.body
+    - field.field.node.person.field_email
+    - field.field.node.person.field_fax
+    - field.field.node.person.field_first_name
+    - field.field.node.person.field_honorific_prefix
+    - field.field.node.person.field_honorific_suffix
+    - field.field.node.person.field_image
+    - field.field.node.person.field_job_title
+    - field.field.node.person.field_last_name
+    - field.field.node.person.field_link
+    - field.field.node.person.field_link_cv
+    - field.field.node.person.field_locations_rooms
+    - field.field.node.person.field_organizations
+    - field.field.node.person.field_person_types
+    - field.field.node.person.field_phone
+    - field.field.node.person.field_preferred_name
+    - node.type.person
+  module:
+    - custom_field
+    - field_group
+    - link
+    - maxlength
+    - media_library
+    - path
+    - telephone
+    - text
+third_party_settings:
+  field_group:
+    group_contact:
+      children:
+        - field_email
+        - field_phone
+        - field_fax
+        - field_locations_rooms
+        - field_link
+        - field_link_cv
+      label: 'Contact Information'
+      region: content
+      parent_name: group_person
+      weight: 21
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_bio:
+      children:
+        - body
+      label: Bio
+      region: content
+      parent_name: group_person
+      weight: 22
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: false
+    group_person:
+      children:
+        - group_information
+        - group_contact
+        - group_bio
+      label: Person
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: vertical
+        width_breakpoint: 640
+    group_information:
+      children:
+        - field_first_name
+        - field_last_name
+        - field_preferred_name
+        - field_honorific_prefix
+        - field_honorific_suffix
+        - field_image
+        - field_job_title
+        - field_person_types
+        - field_organizations
+      label: Information
+      region: content
+      parent_name: group_person
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: open
+        description: ''
+        required_fields: true
+id: node.person.default
+targetEntityType: node
+bundle: person
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 229
+    region: content
+    settings:
+      rows: 12
+      summary_rows: 2
+      placeholder: ''
+      show_summary: false
+    third_party_settings:
+      maxlength:
+        maxlength_js: null
+        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
+        maxlength_js_summary: 250
+        maxlength_js_label_summary: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
+        maxlength_js_enforce: false
+  created:
+    type: datetime_timestamp
+    weight: 200
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_email:
+    type: email_default
+    weight: 9
+    region: content
+    settings:
+      placeholder: ''
+      size: 60
+    third_party_settings: {  }
+  field_fax:
+    type: telephone_default
+    weight: 11
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_first_name:
+    type: string_textfield
+    weight: 222
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_honorific_prefix:
+    type: options_select
+    weight: 225
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_honorific_suffix:
+    type: options_select
+    weight: 226
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_image:
+    type: media_library_widget
+    weight: 227
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_job_title:
+    type: string_textfield
+    weight: 228
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_last_name:
+    type: string_textfield
+    weight: 223
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_link:
+    type: link_default
+    weight: 13
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_link_cv:
+    type: link_default
+    weight: 14
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_locations_rooms:
+    type: custom_flex
+    weight: 12
+    region: content
+    settings:
+      label: true
+      wrapper: div
+      open: true
+      columns: {  }
+      breakpoint: ''
+    third_party_settings: {  }
+  field_organizations:
+    type: entity_reference_autocomplete
+    weight: 230
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_person_types:
+    type: options_buttons
+    weight: 229
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_phone:
+    type: telephone_default
+    weight: 10
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_preferred_name:
+    type: string_textfield
+    weight: 224
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 220
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 210
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 220
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 210
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 200
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  title: true

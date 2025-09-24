@@ -1,0 +1,34 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.sitewide_alert.full
+    - field.field.sitewide_alert.sitewide_alert.field_body
+  module:
+    - layout_builder
+    - sitewide_alert
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: sitewide_alert.sitewide_alert.full
+targetEntityType: sitewide_alert
+bundle: sitewide_alert
+mode: full
+content:
+  field_body:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  message:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

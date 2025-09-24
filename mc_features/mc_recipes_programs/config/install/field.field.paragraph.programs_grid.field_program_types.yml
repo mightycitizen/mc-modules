@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_program_types
+    - paragraphs.paragraphs_type.programs_grid
+    - taxonomy.vocabulary.program_type
+id: paragraph.programs_grid.field_program_types
+field_name: field_program_types
+entity_type: paragraph
+bundle: programs_grid
+label: 'Program Types'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      program_type: program_type
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: program_format
+field_type: entity_reference

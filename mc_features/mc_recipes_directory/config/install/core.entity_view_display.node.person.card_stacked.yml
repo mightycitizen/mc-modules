@@ -1,0 +1,131 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.card_stacked
+    - field.field.node.person.body
+    - field.field.node.person.field_email
+    - field.field.node.person.field_fax
+    - field.field.node.person.field_first_name
+    - field.field.node.person.field_honorific_prefix
+    - field.field.node.person.field_honorific_suffix
+    - field.field.node.person.field_image
+    - field.field.node.person.field_job_title
+    - field.field.node.person.field_last_name
+    - field.field.node.person.field_link
+    - field.field.node.person.field_link_cv
+    - field.field.node.person.field_locations_rooms
+    - field.field.node.person.field_organizations
+    - field.field.node.person.field_person_types
+    - field.field.node.person.field_phone
+    - field.field.node.person.field_preferred_name
+    - node.type.person
+  module:
+    - layout_builder
+    - nomarkup
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.person.card_stacked
+targetEntityType: node
+bundle: person
+mode: card_stacked
+content:
+  field_email:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+    weight: 0
+    region: content
+  field_first_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_honorific_prefix:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_honorific_suffix:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_image:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: false
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+    weight: 3
+    region: content
+  field_job_title:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+    weight: 2
+    region: content
+  field_last_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_phone:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings:
+      nomarkup:
+        enabled: true
+        separator: '|'
+        referenced_entity: ''
+    weight: 1
+    region: content
+  field_preferred_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+hidden:
+  body: true
+  field_fax: true
+  field_link: true
+  field_link_cv: true
+  field_locations_rooms: true
+  field_organizations: true
+  field_person_types: true
+  links: true

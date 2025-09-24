@@ -1,0 +1,361 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.event.body
+    - field.field.node.event.field_address
+    - field.field.node.event.field_audiences
+    - field.field.node.event.field_contact
+    - field.field.node.event.field_cost
+    - field.field.node.event.field_dates
+    - field.field.node.event.field_event_topics
+    - field.field.node.event.field_event_types
+    - field.field.node.event.field_image
+    - field.field.node.event.field_link
+    - field.field.node.event.field_link_register
+    - field.field.node.event.field_link_virtual
+    - field.field.node.event.field_location
+    - field.field.node.event.field_organizations
+    - field.field.node.event.field_room_number
+    - node.type.event
+  module:
+    - address
+    - field_group
+    - link
+    - maxlength
+    - media_library
+    - path
+    - smart_date
+    - smart_date_recur
+    - term_reference_tree
+    - text
+third_party_settings:
+  field_group:
+    group_event:
+      children:
+        - group_event_details
+        - group_event_tags
+        - group_additional_info
+      label: Event
+      region: content
+      parent_name: ''
+      weight: 1
+      format_type: tabs
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        direction: vertical
+        width_breakpoint: 640
+    group_event_details:
+      children:
+        - field_dates
+        - group_event_location
+        - field_image
+        - body
+      label: 'Event Details'
+      region: content
+      parent_name: group_event
+      weight: 20
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_event_tags:
+      children:
+        - field_organizations
+        - field_event_types
+        - field_event_topics
+        - field_audiences
+      label: 'Event Tags'
+      region: content
+      parent_name: group_event
+      weight: 21
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_custom_address:
+      children:
+        - field_address
+      label: 'Custom Location'
+      region: content
+      parent_name: group_event_location
+      weight: 5
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        open: false
+        description: 'By default, the event will use the address of the Location referenced above. If there is no location associated with the event, a custom one may be added here.'
+        required_fields: true
+    group_event_location:
+      children:
+        - field_room_number
+        - field_location
+        - group_custom_address
+      label: 'Event Location'
+      region: content
+      parent_name: group_event_details
+      weight: 3
+      format_type: fieldset
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        description: ''
+        required_fields: true
+    group_additional_info:
+      children:
+        - field_contact
+        - field_cost
+        - field_link
+        - field_link_register
+        - field_link_virtual
+      label: 'Additional Info'
+      region: content
+      parent_name: group_event
+      weight: 22
+      format_type: tab
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        label_as_html: false
+        formatter: closed
+        description: ''
+        required_fields: true
+id: node.event.default
+targetEntityType: node
+bundle: event
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 6
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: true
+    third_party_settings:
+      maxlength:
+        maxlength_js: null
+        maxlength_js_label: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
+        maxlength_js_summary: 150
+        maxlength_js_label_summary: 'Content limited to @limit characters, remaining: <strong>@remaining</strong>'
+        maxlength_js_enforce: false
+  created:
+    type: datetime_timestamp
+    weight: 200
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_address:
+    type: address_default
+    weight: 13
+    region: content
+    settings:
+      wrapper_type: fieldset
+    third_party_settings: {  }
+  field_audiences:
+    type: term_reference_tree
+    weight: 6
+    region: content
+    settings:
+      start_minimized: false
+      leaves_only: false
+      select_parents: true
+      cascading_selection: 0
+      max_depth: 0
+    third_party_settings: {  }
+  field_contact:
+    type: entity_reference_autocomplete
+    weight: 225
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_cost:
+    type: string_textfield
+    weight: 226
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_dates:
+    type: smartdate_inline
+    weight: 1
+    region: content
+    settings:
+      modal: false
+      default_duration: 60
+      default_duration_increments: |-
+        30
+        60|1 hour
+        90
+        120|2 hours
+        custom
+      show_extra: false
+      hide_date: true
+      allday: true
+      remove_seconds: true
+      duration_overlay: true
+      separator: to
+    third_party_settings:
+      smart_date_recur:
+        modal: true
+        show_single: false
+        allowed_recur_freq_values:
+          MINUTELY: '0'
+          HOURLY: '0'
+          DAILY: DAILY
+          WEEKLY: WEEKLY
+          MONTHLY: MONTHLY
+          YEARLY: YEARLY
+  field_event_topics:
+    type: term_reference_tree
+    weight: 5
+    region: content
+    settings:
+      start_minimized: false
+      leaves_only: false
+      select_parents: true
+      cascading_selection: 0
+      max_depth: 0
+    third_party_settings: {  }
+  field_event_types:
+    type: term_reference_tree
+    weight: 4
+    region: content
+    settings:
+      start_minimized: false
+      leaves_only: false
+      select_parents: true
+      cascading_selection: 0
+      max_depth: 0
+    third_party_settings: {  }
+  field_image:
+    type: media_library_widget
+    weight: 5
+    region: content
+    settings:
+      media_types: {  }
+    third_party_settings: {  }
+  field_link:
+    type: link_default
+    weight: 227
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_link_register:
+    type: link_default
+    weight: 228
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_link_virtual:
+    type: link_default
+    weight: 229
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_location:
+    type: entity_reference_autocomplete
+    weight: 4
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_organizations:
+    type: entity_reference_autocomplete
+    weight: 3
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_room_number:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 220
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 210
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 220
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 210
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 200
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

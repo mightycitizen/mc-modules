@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_alignment
+    - paragraphs.paragraphs_type.split_content
+  module:
+    - options
+id: paragraph.split_content.field_alignment
+field_name: field_alignment
+entity_type: paragraph
+bundle: split_content
+label: Alignment
+description: 'Select whether the body field should be aligned in the left or right column.'
+required: true
+translatable: false
+default_value:
+  -
+    value: left
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - sitewide_alert
+id: sitewide_alert.teaser
+label: Teaser
+description: null
+targetEntityType: sitewide_alert
+cache: true

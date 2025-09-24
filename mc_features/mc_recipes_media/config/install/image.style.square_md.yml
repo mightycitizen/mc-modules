@@ -1,0 +1,17 @@
+uuid: 0f12e5e4-8ed8-40be-baa3-83555ac08cbe
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: square_md
+label: 'Square MD (450×450)'
+effects:
+  3e2c677f-fdd7-4b7f-b92d-c750bdef3a17:
+    uuid: 3e2c677f-fdd7-4b7f-b92d-c750bdef3a17
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 450
+      height: 450
+      crop_type: focal_point

@@ -1,0 +1,23 @@
+name: Locations
+type: module
+core_version_requirement: '^10 || ^11'
+dependencies:
+  - address
+  - custom_field
+  - field
+  - field_group
+  - layout_builder
+  - link
+  - maxlength
+  - media_library
+  - menu_ui
+  - node
+  - nomarkup
+  - office_hours
+  - path
+  - schemadotorg
+  - taxonomy
+  - text
+  - type_tray
+  - user
+package: 'MC Recipes'

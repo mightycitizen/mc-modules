@@ -1,0 +1,5 @@
+name: 'MC Directory'
+type: module
+description: 'Custom logic for person and organization nodes.'
+package: MC
+core_version_requirement: ^11

@@ -1,0 +1,5 @@
+bundle: mc_recipes
+excluded:
+  - block.block.mc_theme_views_block__events_block_related
+  - block.block.mc_theme_views_block__news_block_related
+required: true

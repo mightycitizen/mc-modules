@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_program_formats
+    - node.type.program
+    - taxonomy.vocabulary.program_format
+id: node.program.field_program_formats
+field_name: field_program_formats
+entity_type: node
+bundle: program
+label: Formats
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      program_format: program_format
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

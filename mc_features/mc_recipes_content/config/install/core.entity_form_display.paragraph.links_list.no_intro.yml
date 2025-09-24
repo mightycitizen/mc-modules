@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.paragraph.no_intro
+    - field.field.paragraph.links_list.field_intro
+    - field.field.paragraph.links_list.field_links
+    - paragraphs.paragraphs_type.links_list
+  module:
+    - inline_entity_form
+    - link
+id: paragraph.links_list.no_intro
+targetEntityType: paragraph
+bundle: links_list
+mode: no_intro
+content:
+  field_intro:
+    type: inline_entity_form_simple
+    weight: 0
+    region: content
+    settings:
+      form_mode: no_intro
+      override_labels: false
+      label_singular: ''
+      label_plural: ''
+      collapsible: false
+      collapsed: false
+      revision: false
+    third_party_settings: {  }
+  field_links:
+    type: link_default
+    weight: 1
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

@@ -1,0 +1,136 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_components_primary
+    - node.type.page
+    - paragraphs.paragraphs_type.accordion
+    - paragraphs.paragraphs_type.contact
+    - paragraphs.paragraphs_type.content_grid
+    - paragraphs.paragraphs_type.cta_basic
+    - paragraphs.paragraphs_type.cta_form
+    - paragraphs.paragraphs_type.cta_links
+    - paragraphs.paragraphs_type.events_grid
+    - paragraphs.paragraphs_type.form
+    - paragraphs.paragraphs_type.from_library
+    - paragraphs.paragraphs_type.links_list
+    - paragraphs.paragraphs_type.news_grid
+    - paragraphs.paragraphs_type.news_grid_featured
+    - paragraphs.paragraphs_type.people_grid
+    - paragraphs.paragraphs_type.people_grid_manual
+    - paragraphs.paragraphs_type.programs_grid_manual
+    - paragraphs.paragraphs_type.split_content
+    - paragraphs.paragraphs_type.statistics
+    - paragraphs.paragraphs_type.wysiwyg
+  module:
+    - entity_reference_revisions
+id: node.page.field_components_primary
+field_name: field_components_primary
+entity_type: node
+bundle: page
+label: 'Main Components'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      accordion: accordion
+      statistics: statistics
+      form: form
+      wysiwyg: wysiwyg
+      cta_basic: cta_basic
+      cta_links: cta_links
+      content_grid: content_grid
+      from_library: from_library
+      cta_form: cta_form
+      contact: contact
+      links_list: links_list
+      events_grid: events_grid
+      split_content: split_content
+      news_grid: news_grid
+      people_grid: people_grid
+      news_grid_featured: news_grid_featured
+      people_grid_manual: people_grid_manual
+      programs_grid_manual: programs_grid_manual
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: 4
+        enabled: true
+      accordion_item:
+        weight: 5
+        enabled: false
+      card:
+        weight: 15
+        enabled: false
+      contact:
+        weight: 20
+        enabled: true
+      contact_item:
+        weight: 21
+        enabled: false
+      content_grid:
+        weight: 16
+        enabled: true
+      cta_basic:
+        weight: 13
+        enabled: true
+      cta_form:
+        weight: 19
+        enabled: true
+      cta_links:
+        weight: 14
+        enabled: true
+      events_grid:
+        weight: 32
+        enabled: true
+      form:
+        weight: 10
+        enabled: true
+      from_library:
+        weight: 16
+        enabled: true
+      intro:
+        weight: 6
+        enabled: false
+      links_list:
+        weight: 31
+        enabled: true
+      media:
+        weight: 32
+        enabled: false
+      news_grid:
+        weight: 38
+        enabled: true
+      news_grid_featured:
+        weight: 42
+        enabled: true
+      people_grid:
+        weight: 39
+        enabled: true
+      people_grid_manual:
+        weight: 42
+        enabled: true
+      programs_grid:
+        weight: 40
+        enabled: false
+      programs_grid_manual:
+        weight: 44
+        enabled: true
+      split_content:
+        weight: 33
+        enabled: true
+      statistic_item:
+        weight: 10
+        enabled: false
+      statistics:
+        weight: 9
+        enabled: true
+      wysiwyg:
+        weight: 12
+        enabled: true
+field_type: entity_reference_revisions

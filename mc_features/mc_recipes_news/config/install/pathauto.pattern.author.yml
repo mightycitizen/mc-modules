@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: author
+label: Author
+type: 'canonical_entities:node'
+pattern: 'news/author/[node:title]'
+selection_criteria:
+  6130c094-8b29-4e83-b223-e8841c0ecce6:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 6130c094-8b29-4e83-b223-e8841c0ecce6
+    context_mapping:
+      node: node
+    bundles:
+      author: author
+selection_logic: and
+weight: -5
+relationships: {  }

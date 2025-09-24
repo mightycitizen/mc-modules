@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_content_types
+    - taxonomy.vocabulary.person_type
+id: taxonomy_term.person_type.field_content_types
+field_name: field_content_types
+entity_type: taxonomy_term
+bundle: person_type
+label: 'Content Types'
+description: 'Select the content types that this Person Type applies to. Content types that are selected will be able to categorize content by this taxonomy term. If left blank, it will apply to all content types that have this field.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node_type'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: entity_reference

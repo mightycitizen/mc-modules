@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies: {  }
+id: alerts
+label: 'Alerts Page'
+token: false
+context:
+  show_warning: true
+  group:
+    language: false
+  fallback:
+    language: ''
+menu:
+  path: ''
+  weight: 0
+  description: ''

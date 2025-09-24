@@ -1,0 +1,63 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_addresses
+    - node.type.organization
+  module:
+    - address
+id: node.organization.field_addresses
+field_name: field_addresses
+entity_type: node
+bundle: organization
+label: 'Mailing Address'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    langcode: null
+    country_code: US
+    administrative_area: ''
+    locality: ''
+    dependent_locality: null
+    postal_code: ''
+    sorting_code: null
+    address_line1: ''
+    address_line2: ''
+    address_line3: ''
+    organization: ''
+    given_name: null
+    additional_name: null
+    family_name: null
+default_value_callback: ''
+settings:
+  available_countries: {  }
+  langcode_override: ''
+  field_overrides:
+    givenName:
+      override: hidden
+    additionalName:
+      override: hidden
+    familyName:
+      override: hidden
+    organization:
+      override: optional
+    addressLine1:
+      override: optional
+    addressLine2:
+      override: optional
+    addressLine3:
+      override: optional
+    postalCode:
+      override: optional
+    sortingCode:
+      override: optional
+    dependentLocality:
+      override: hidden
+    locality:
+      override: optional
+    administrativeArea:
+      override: optional
+  fields: {  }
+field_type: address

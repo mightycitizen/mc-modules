@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.sitewide_alert.field_body
+    - filter.format.wysiwyg
+  module:
+    - sitewide_alert
+    - text
+id: sitewide_alert.sitewide_alert.field_body
+field_name: field_body
+entity_type: sitewide_alert
+bundle: sitewide_alert
+label: Body
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - wysiwyg
+field_type: text_long

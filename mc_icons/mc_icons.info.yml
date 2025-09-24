@@ -1,0 +1,8 @@
+name: "MC Icons"
+type: module
+description: "Custom icons to use with the UI Icons module."
+package: MC
+core_version_requirement: ^10.3 || ^11
+dependencies:
+  - ui_icons:ui_icons
+  - graphql_compose:graphql_compose

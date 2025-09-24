@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.alerts
+    - field.storage.config_pages.field_heading
+id: config_pages.alerts.field_heading
+field_name: field_heading
+entity_type: config_pages
+bundle: alerts
+label: 'Page Title'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: Alerts
+default_value_callback: ''
+settings: {  }
+field_type: string

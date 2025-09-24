@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.contact.field_contact_items
+    - field.field.paragraph.contact.field_intro
+    - paragraphs.paragraphs_type.contact
+  module:
+    - entity_reference_revisions
+id: paragraph.contact.default
+targetEntityType: paragraph
+bundle: contact
+mode: default
+content:
+  field_contact_items:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_intro:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_card_view_mode
+    - paragraphs.paragraphs_type.programs_grid
+  module:
+    - options
+id: paragraph.programs_grid.field_card_view_mode
+field_name: field_card_view_mode
+entity_type: paragraph
+bundle: programs_grid
+label: 'Card View Mode'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: card
+default_value_callback: ''
+settings: {  }
+field_type: list_string

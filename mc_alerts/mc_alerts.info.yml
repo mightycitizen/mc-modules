@@ -1,0 +1,9 @@
+name: MC Alerts
+type: module
+description: Customizations to Sitewide Alerts.
+core_version_requirement: ^9.2 || ^10 || ^11
+package: MC
+dependencies:
+  - sitewide_alert:sitewide_alert
+  - mc_custom:mc_custom
+  - config_pages:config_pages

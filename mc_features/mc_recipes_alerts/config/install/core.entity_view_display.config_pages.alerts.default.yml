@@ -1,0 +1,104 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - config_pages.type.alerts
+    - field.field.config_pages.alerts.field_alerts_active_body
+    - field.field.config_pages.alerts.field_alerts_active_heading
+    - field.field.config_pages.alerts.field_alerts_inactive_body
+    - field.field.config_pages.alerts.field_alerts_inactive_heading
+    - field.field.config_pages.alerts.field_body
+    - field.field.config_pages.alerts.field_cta_primary
+    - field.field.config_pages.alerts.field_cta_secondary
+    - field.field.config_pages.alerts.field_heading
+    - field.field.config_pages.alerts.field_links_5
+  module:
+    - link
+    - text
+id: config_pages.alerts.default
+targetEntityType: config_pages
+bundle: alerts
+mode: default
+content:
+  field_alerts_active_body:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  field_alerts_active_heading:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  field_alerts_inactive_body:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_alerts_inactive_heading:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  field_body:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_cta_primary:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_cta_secondary:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_heading:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_links_5:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 7
+    region: content
+hidden: {  }

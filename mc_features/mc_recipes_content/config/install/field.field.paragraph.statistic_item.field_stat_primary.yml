@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_stat_primary
+    - filter.format.text_links
+    - paragraphs.paragraphs_type.statistic_item
+  module:
+    - text
+id: paragraph.statistic_item.field_stat_primary
+field_name: field_stat_primary
+entity_type: paragraph
+bundle: statistic_item
+label: 'Primary Value'
+description: 'A short, primary value. Displayed first in the largest size.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - text_links
+field_type: text

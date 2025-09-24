@@ -1,0 +1,61 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.programs_grid_manual.field_intro
+    - field.field.paragraph.programs_grid_manual.field_programs
+    - paragraphs.paragraphs_type.programs_grid_manual
+  module:
+    - paragraphs
+    - paragraphs_ee
+    - paragraphs_features
+id: paragraph.programs_grid_manual.default
+targetEntityType: paragraph
+bundle: programs_grid_manual
+mode: default
+content:
+  field_intro:
+    type: paragraphs
+    weight: 0
+    region: content
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: closed
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: intro
+      features:
+        add_above: '0'
+        collapse_edit_all: collapse_edit_all
+        convert: '0'
+        duplicate: duplicate
+    third_party_settings:
+      paragraphs_features:
+        add_in_between: false
+        add_in_between_link_count: 3
+        delete_confirmation: false
+        show_drag_and_drop: true
+        show_collapse_all: true
+      paragraphs_ee:
+        paragraphs_ee:
+          dialog_off_canvas: false
+          dialog_style: tiles
+          drag_drop: false
+          sidebar_disabled: false
+  field_programs:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  status: true

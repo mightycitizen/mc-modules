@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_paragraphs_8
+    - paragraphs.paragraphs_type.statistic_item
+    - paragraphs.paragraphs_type.statistics
+  module:
+    - entity_reference_revisions
+id: paragraph.statistics.field_paragraphs_8
+field_name: field_paragraphs_8
+entity_type: paragraph
+bundle: statistics
+label: Paragraphs
+description: 'Add up to 8 individual statistics to display in this component.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      statistic_item: statistic_item
+    negate: 0
+    target_bundles_drag_drop:
+      accordion:
+        weight: 6
+        enabled: false
+      accordion_item:
+        weight: 7
+        enabled: false
+      intro:
+        weight: 8
+        enabled: false
+      statistic_item:
+        weight: 10
+        enabled: true
+      statistics:
+        weight: 9
+        enabled: false
+field_type: entity_reference_revisions

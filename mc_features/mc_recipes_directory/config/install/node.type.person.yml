@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+    - type_tray
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+  type_tray:
+    type_category: profiles
+    type_thumbnail: ''
+    type_icon: /modules/custom/mc_icons/icons/phosphor/regular/identification-badge.svg
+    type_description: ''
+    existing_nodes_link_text: 'View existing <em class="placeholder">Person</em> content'
+    type_weight: 0
+name: Person
+type: person
+description: 'A profile for an individual, used in directories and contact information.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: false

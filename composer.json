@@ -1,0 +1,15 @@
+{
+  "name": "mightycitizen/mc-modules",
+  "type": "metapackage",
+  "require": {
+    "mightycitizen/mc-alerts": "^1.0 || dev-main",
+    "mightycitizen/mc-custom": "^1.0 || dev-main",
+    "mightycitizen/mc-directory": "^1.0 || dev-main",
+    "mightycitizen/mc-icons": "^1.0 || dev-main"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-main": "1.x-dev"
+    }
+  }
+}

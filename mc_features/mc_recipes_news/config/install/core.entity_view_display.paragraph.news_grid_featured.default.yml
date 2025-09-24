@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.news_grid_featured.field_featured_view_mode
+    - field.field.paragraph.news_grid_featured.field_intro
+    - field.field.paragraph.news_grid_featured.field_news_topics
+    - paragraphs.paragraphs_type.news_grid_featured
+  module:
+    - entity_reference_revisions
+    - options
+id: paragraph.news_grid_featured.default
+targetEntityType: paragraph
+bundle: news_grid_featured
+mode: default
+content:
+  field_featured_view_mode:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_intro:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  field_news_topics:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden: {  }

@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.content_only
+    - field.field.paragraph.statistics.field_intro
+    - field.field.paragraph.statistics.field_paragraphs_8
+    - paragraphs.paragraphs_type.statistics
+  module:
+    - entity_reference_revisions
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: paragraph.statistics.content_only
+targetEntityType: paragraph
+bundle: statistics
+mode: content_only
+content:
+  field_paragraphs_8:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_intro: true

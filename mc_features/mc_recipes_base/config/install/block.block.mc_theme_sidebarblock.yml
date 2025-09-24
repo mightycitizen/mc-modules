@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - mc_custom
+    - node
+  theme:
+    - mc_theme
+id: mc_theme_sidebarblock
+theme: mc_theme
+region: sidebar_first
+weight: -5
+provider: null
+plugin: sidebar_block
+settings:
+  id: sidebar_block
+  label: 'Sidebar Block'
+  label_display: '0'
+  provider: mc_custom
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      event: event
+      location: location

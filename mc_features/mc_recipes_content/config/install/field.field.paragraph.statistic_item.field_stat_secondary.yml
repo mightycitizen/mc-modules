@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_stat_secondary
+    - filter.format.text_links
+    - paragraphs.paragraphs_type.statistic_item
+  module:
+    - text
+id: paragraph.statistic_item.field_stat_secondary
+field_name: field_stat_secondary
+entity_type: paragraph
+bundle: statistic_item
+label: 'Secondary Information'
+description: 'A secondary value or supporting information. Displayed in large text below the primary value.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_formats:
+    - text_links
+field_type: text

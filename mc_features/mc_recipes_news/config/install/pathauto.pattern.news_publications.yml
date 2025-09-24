@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: news_publications
+label: 'News Publications'
+type: 'canonical_entities:taxonomy_term'
+pattern: 'news/publication/[term:name]'
+selection_criteria:
+  3b6eacdf-ccbb-4a2f-8735-c3836f8092eb:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 3b6eacdf-ccbb-4a2f-8735-c3836f8092eb
+    context_mapping:
+      node: node
+    bundles:
+      news: news
+  e2f39c24-4611-43fa-89e5-df2b39283c3e:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: e2f39c24-4611-43fa-89e5-df2b39283c3e
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      news_publication: news_publication
+selection_logic: and
+weight: -5
+relationships: {  }

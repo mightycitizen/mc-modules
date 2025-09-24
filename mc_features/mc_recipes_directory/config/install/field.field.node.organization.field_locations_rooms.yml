@@ -1,0 +1,64 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_locations_rooms
+    - node.type.location
+    - node.type.organization
+  module:
+    - custom_field
+id: node.organization.field_locations_rooms
+field_name: field_locations_rooms
+entity_type: node
+bundle: organization
+label: Locations
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  add_more_label: ''
+  field_settings:
+    location:
+      type: entity_reference_autocomplete
+      weight: -9
+      check_empty: false
+      widget_settings:
+        label: Location
+        translatable: false
+        settings:
+          description: ''
+          description_display: after
+          size: 60
+          placeholder: ''
+          required: false
+          match_operator: CONTAINS
+          match_limit: 10
+          handler: 'default:node'
+          handler_settings:
+            sort:
+              field: _none
+              direction: ASC
+            auto_create: false
+            target_bundles:
+              location: location
+            auto_create_bundle: ''
+    room_number:
+      type: text
+      weight: -10
+      check_empty: false
+      widget_settings:
+        label: 'Room number'
+        translatable: false
+        settings:
+          description: ''
+          description_display: after
+          size: 60
+          placeholder: ''
+          maxlength: 255
+          maxlength_js: false
+          prefix: ''
+          suffix: ''
+          required: false
+field_type: custom

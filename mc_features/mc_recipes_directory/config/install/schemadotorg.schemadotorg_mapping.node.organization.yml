@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.organization.body
+    - field.field.node.organization.field_addresses
+    - field.field.node.organization.field_email
+    - field.field.node.organization.field_fax
+    - field.field.node.organization.field_image
+    - field.field.node.organization.field_organizations
+    - field.field.node.organization.field_phone
+    - field.field.node.organization.field_short_name
+    - node.type.organization
+  module:
+    - node
+id: node.organization
+target_entity_type_id: node
+target_bundle: organization
+schema_type: Organization
+schema_properties:
+  field_addresses: address
+  field_short_name: alternateName
+  body: description
+  field_email: email
+  field_fax: faxNumber
+  field_image: image
+  title: name
+  field_organizations: parentOrganization
+  field_phone: telephone
+additional_mappings: {  }
