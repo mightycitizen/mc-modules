@@ -1,21 +1,10 @@
 {
   "name": "mightycitizen/mc-modules",
   "type": "metapackage",
-  "repositories": [
-      {
-          "type": "path",
-          "url": "./web/modules/custom/*"
-      }
-  ],
   "require": {
-    "mightycitizen/mc-alerts": "^1.0 || dev-main",
-    "mightycitizen/mc-custom": "^1.0 || dev-main",
-    "mightycitizen/mc-directory": "^1.0 || dev-main",
-    "mightycitizen/mc-icons": "^1.0 || dev-main"
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-main": "1.x-dev"
-    }
+    "mightycitizen/mc-alerts": "*",
+    "mightycitizen/mc-custom": "*",
+    "mightycitizen/mc-directory": "*",
+    "mightycitizen/mc-icons": "*"
   }
 }
