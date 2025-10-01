@@ -113,16 +113,19 @@ class FooterBlock extends BlockBase {
               if (empty($address_field[0]['address_line1'])) {
                 continue 2; // Prevents accidental empty values (e.g. if country is set as default but all other values are empty)
               }
-              $address_array = array_filter([
+              $address_top = array_filter([
                 $address_field[0]['address_line1'],
                 $address_field[0]['address_line2'],
                 $address_field[0]['address_line3'],
+              ]);
+              $address_bottom = array_filter([
                 $address_field[0]['locality'],
                 $address_field[0]['administrative_area'],
                 $address_field[0]['postal_code'],
               ]);
               // Get user-friendly address string.
-              $address_string = implode(', ', $address_array);
+              $address_string = implode(', ', array_merge($address_top, $address_bottom));
+              $text = implode('<br>', $address_top) . '<br>' . implode(', ', $address_bottom);
               $icon = 'icon-map-pin-line';
               $label = t('Get Directions');
               $url = 'https://www.google.com/maps/search/?api=1&query=' . urlencode($address_string);
