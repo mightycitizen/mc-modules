@@ -13,7 +13,7 @@ phosphor:
   extractor: svg
   config:
     sources:
-      - icons/phosphor/regular/{icon_id}.svg
+      - icons/phosphor/{regular,fill}/{icon_id}.svg
       # Or include multiple versions.
       # - icons/{regular,thin,duotone}/{icon_id}.svg
   settings:
