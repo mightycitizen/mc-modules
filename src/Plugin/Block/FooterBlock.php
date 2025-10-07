@@ -44,6 +44,7 @@ class FooterBlock extends BlockBase {
       'field_social_instagram',
       'field_social_linkedin',
       'field_social_youtube',
+      'field_social_tiktok',
     ];
 
     foreach ($social_fields as $field) {
