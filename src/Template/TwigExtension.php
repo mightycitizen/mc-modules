@@ -81,6 +81,9 @@ class TwigExtension extends AbstractExtension  {
     if ($icon_parts[0] == 'phosphor') {
       $icon_classes = 'ph ph-' . $icon_parts[1] . ' bg-transparent';
     }
+    elseif($icon_parts[0] == 'phosphor_fill') {
+      $icon_classes = 'ph-fill ph-' . trim($icon_parts[1], '-fill') . ' bg-transparent';
+    }
 
     return [
       'name' => $icon_classes,
