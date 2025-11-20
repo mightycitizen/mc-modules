@@ -115,7 +115,7 @@ class TwigExtension extends AbstractExtension  {
    *   Defaults to current theme if parameters are not provided.
    */
   public function getThemeLogo($logo_src = NULL, $logo_alt = NULL, $url = NULL) {
-    $homepage = $url ?? \Drupal::config('system.site')->get('page.front');
+    $homepage = $url ?? \Drupal\Core\Url::fromRoute('<front>');
     $logo_src = $logo_src ?? theme_get_setting('logo.url');
     $logo_alt = $logo_alt ?? t(':site_name Logo', [
       ':site_name' => \Drupal::config('system.site')->get('name'),
