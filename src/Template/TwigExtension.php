@@ -23,6 +23,10 @@ class TwigExtension extends AbstractExtension  {
    */
   public function getFunctions() {
     return [
+      new TwigFunction('mc_video_url', [
+        $this,
+        'getVideoEmbed'
+      ]),
       new TwigFunction('mc_entities', [
         $this,
         'getEntityRefs'
@@ -40,6 +44,25 @@ class TwigExtension extends AbstractExtension  {
         'getThemeLogo'
       ]),
     ];
+  }
+
+  /**
+   * Returns a formatted embed URL for supported video providers.
+   *
+   */
+  public function getVideoEmbed($url) {
+    $embed_url = $url;
+    if (strpos($url, 'youtube.com') !== FALSE || strpos($url, 'youtu.be') !== FALSE) {
+      if (preg_match('/(youtu\\.be\\/|v=)([\\w-]+)/', $url, $matches)) {
+        $embed_url = 'https://www.youtube.com/embed/' . $matches[2];
+      }
+    }
+    if (strpos($url, 'vimeo.com') !== FALSE) {
+      if (preg_match('/vimeo\\.com\\/(\\d+)/', $url, $matches)) {
+        $embed_url = 'https://player.vimeo.com/video/' . $matches[1];
+      }
+    }
+    return $embed_url;
   }
 
   /**
