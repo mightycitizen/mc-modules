@@ -53,7 +53,7 @@ class TwigExtension extends AbstractExtension  {
   public function getVideoEmbed($url) {
     $embed_url = $url;
     if (strpos($url, 'youtube.com') !== FALSE || strpos($url, 'youtu.be') !== FALSE) {
-      if (preg_match('/(youtu\\.be\\/|v=)([\\w-]+)/', $url, $matches)) {
+      if (preg_match('/(youtu\\.be\\/|v=|\\/shorts\\/)([\\w-]+)/', $url, $matches)) {
         $embed_url = 'https://www.youtube.com/embed/' . $matches[2];
       }
     }
