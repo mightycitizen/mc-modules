@@ -1,0 +1,7 @@
+views_bef_cleanup:
+  js:
+    js/views-bef-cleanup.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/once
